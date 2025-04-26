@@ -8,24 +8,20 @@ const btn = document.querySelector("section button");
 const modelist = document.querySelector("div.list_mode");
 const switchermode = document.querySelector("div.mode");
 const allmodes = document.querySelectorAll("ul.drop_mode li");
+const DropMode = document.querySelector("ul.drop_mode");
 const modeicon = document.getElementById("mode_icon");
 const form = document.querySelector("section");
 const listrapper = document.querySelector("div.lists");
 const complatediv = document.querySelector("div.complate > p");
 const uncomplatediv = document.querySelector("div.uncomplate > p");
-
+console.log(DropMode);
 // get all todolists
 const allTodo = localStorage.getItem("todos");
 const Todo_lists = JSON.parse(allTodo) || [];
 //localStorage.setItem("mode", "false");
 const data = navigator.userAgentData;
-// open and close mode list
-switchermode.addEventListener("click", () => {
-  modelist.classList.toggle("active");
-});
-
+// functions
 // private
-
 const setStaticdatat = () => {
   let complate_text = Todo_lists.filter((todo) => {
     return todo.complate === true;
@@ -79,6 +75,7 @@ const setmode = () => {
       input.classList.add("dark");
       btn.classList.add("dark");
       listrapper.classList.add("dark");
+      DropMode.classList.add("dark");
       modeicon.innerHTML = `<i class="bx bx-desktop"></i>`;
     } else {
       body.classList.remove("dark");
@@ -86,6 +83,7 @@ const setmode = () => {
       input.classList.remove("dark");
       btn.classList.remove("dark");
       listrapper.classList.remove("dark");
+      DropMode.classList.remove("dark");
       modeicon.innerHTML = `<i class="bx bx-desktop"></i>`;
     }
   }
@@ -96,7 +94,7 @@ const setmode = () => {
     input.classList.add("dark");
     btn.classList.add("dark");
     listrapper.classList.add("dark");
-
+    DropMode.classList.add("dark");
     modeicon.innerHTML = `<i class="bx bxs-moon"></i>`;
   } else if (Localmode === "false") {
     body.classList.remove("dark");
@@ -104,7 +102,7 @@ const setmode = () => {
     input.classList.remove("dark");
     btn.classList.remove("dark");
     listrapper.classList.remove("dark");
-
+    DropMode.classList.remove("dark");
     modeicon.innerHTML = `<i class="bx bxs-sun"></i>`;
   }
 };
@@ -177,6 +175,16 @@ const setdata = () => {
 };
 
 setdata();
+setStaticdatat();
+//complateTodo("531014ae-a13b-4b01-bcc9-6eff430d09ae");
+
+// events
+// open and close mode list
+switchermode.addEventListener("click", () => {
+  modelist.classList.toggle("active");
+});
+
+// create todo and add to the list
 btn.addEventListener("click", (e) => {
   const Todo = {
     id: crypto.randomUUID(),
@@ -196,5 +204,3 @@ btn.addEventListener("click", (e) => {
 
   setdata();
 });
-setStaticdatat();
-complateTodo("531014ae-a13b-4b01-bcc9-6eff430d09ae");
