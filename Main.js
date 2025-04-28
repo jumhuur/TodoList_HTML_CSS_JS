@@ -3,6 +3,7 @@ const body = document.querySelector("body");
 const Head = document.querySelector("div.main_head");
 const input = document.querySelector("section input");
 const btn = document.querySelector("section button");
+const audio = document.querySelector("audio");
 //const lists = document.querySelector("div.list");
 //const text = document.querySelector("div.text p");
 const modelist = document.querySelector("div.list_mode");
@@ -72,6 +73,9 @@ const complateTodo = (Id) => {
   localStorage.setItem("todos", JSON.stringify(All));
   const strgdata = localStorage.getItem("todos");
   Todo_lists = JSON.parse(strgdata);
+  setTimeout(() => {
+    audio.play();
+  }, 200);
   setdata();
 };
 
