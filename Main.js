@@ -14,10 +14,9 @@ const form = document.querySelector("section");
 const listrapper = document.querySelector("div.lists");
 const complatediv = document.querySelector("div.complate > p");
 const uncomplatediv = document.querySelector("div.uncomplate > p");
-console.log(DropMode);
 // get all todolists
 const allTodo = localStorage.getItem("todos");
-const Todo_lists = JSON.parse(allTodo) || [];
+let Todo_lists = JSON.parse(allTodo) || [];
 //localStorage.setItem("mode", "false");
 const data = navigator.userAgentData;
 // functions
@@ -34,15 +33,28 @@ const setStaticdatat = () => {
   uncomplatediv.textContent = `uncomplate : ${uncomplate_text.length}`;
 };
 
+// attachEvent
+const attachEvent = (btn, todo) => {
+  const Deletebtn = btn.querySelector(".action");
+  Deletebtn.addEventListener("click", () => {
+    DeleteTodo(todo.id);
+  });
+
+  const updatebtn = btn.querySelector(".icon");
+  updatebtn.addEventListener("click", () => {
+    complateTodo(todo.id);
+  });
+};
+
 // delete function
 const DeleteTodo = (Id) => {
-  console.log(Id);
   const saafi = Todo_lists.filter((todo) => {
     return todo.id != Id;
   });
   localStorage.setItem("todos", JSON.stringify(saafi));
+  const strgdata = localStorage.getItem("todos");
+  Todo_lists = JSON.parse(strgdata);
   setdata();
-  console.log(Id);
 };
 
 // update funtions
@@ -50,7 +62,7 @@ const complateTodo = (Id) => {
   let Todonow = Todo_lists.filter((Todo) => {
     return Todo.id === Id;
   });
-  Todonow = [{ ...Todonow[0], complate: true }];
+  Todonow = [{ ...Todonow[0], complate: !Todonow[0].complate }];
   console.log(Todonow);
   let All = Todo_lists.filter((Todo) => {
     return Todo.id !== Id;
@@ -58,16 +70,15 @@ const complateTodo = (Id) => {
 
   All.push(...Todonow);
   localStorage.setItem("todos", JSON.stringify(All));
+  const strgdata = localStorage.getItem("todos");
+  Todo_lists = JSON.parse(strgdata);
   setdata();
-  console.log(All);
 };
 
 const setmode = () => {
   const SystemMode = matchMedia("(prefers-color-scheme: dark)").matches;
   const Localmode = localStorage.getItem("mode");
   setStaticdatat();
-  console.log(SystemMode);
-  console.log(Localmode);
   if (Localmode == null) {
     if (SystemMode === true) {
       body.classList.add("dark");
@@ -146,6 +157,9 @@ const setdata = () => {
   if (Todo_lists.length > 0) {
     Todo_lists.forEach((todo) => {
       const sectionList = document.createElement("div");
+      const action = document.createElement("div");
+      action.setAttribute("class", "action");
+      console.log(action);
       sectionList.classList.add("list");
       sectionList.innerHTML = `<div class="icon">
               ${
@@ -166,10 +180,11 @@ const setdata = () => {
             }
 
             </div>
-            <div class="action">
-              <i class="bx bx-trash"></i>
-            </div>`;
+          `;
+      action.innerHTML = `<i class="bx bx-trash"></i>`;
+      sectionList.appendChild(action);
       listrapper.appendChild(sectionList);
+      attachEvent(sectionList, todo);
     });
   }
 };
