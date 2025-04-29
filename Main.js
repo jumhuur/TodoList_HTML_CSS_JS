@@ -64,7 +64,6 @@ const complateTodo = (Id) => {
     return Todo.id === Id;
   });
   Todonow = [{ ...Todonow[0], complate: !Todonow[0].complate }];
-  console.log(Todonow);
   let All = Todo_lists.filter((Todo) => {
     return Todo.id !== Id;
   });
@@ -128,7 +127,6 @@ setmode();
 allmodes.forEach((mode) => {
   mode.addEventListener("click", (e) => {
     const class_now = e.target.className;
-    console.log(class_now);
     if (class_now === "bx bxs-moon") {
       localStorage.setItem("mode", "true");
       modeicon.innerHTML = `<i class="bx bxs-moon"></i>`;
@@ -163,7 +161,6 @@ const setdata = () => {
       const sectionList = document.createElement("div");
       const action = document.createElement("div");
       action.setAttribute("class", "action");
-      console.log(action);
       sectionList.classList.add("list");
       sectionList.innerHTML = `<div class="icon">
               ${
