@@ -15,6 +15,7 @@ const form = document.querySelector("section");
 const listrapper = document.querySelector("div.lists");
 const complatediv = document.querySelector("div.complate > p");
 const uncomplatediv = document.querySelector("div.uncomplate > p");
+
 // get all todolists
 const allTodo = localStorage.getItem("todos");
 let Todo_lists = JSON.parse(allTodo) || [];
@@ -213,6 +214,7 @@ btn.addEventListener("click", (e) => {
     localStorage.setItem("todos", JSON.stringify(Todo_lists));
     input.value = "";
     listrapper.innerHTML = "";
+    input.focus();
     setdata();
   } else {
     alert("you cant add empty todo ");
