@@ -186,6 +186,7 @@ const setdata = () => {
       action.innerHTML = `<i class="bx bx-trash"></i>`;
       sectionList.appendChild(action);
       listrapper.appendChild(sectionList);
+      input.focus();
       attachEvent(sectionList, todo);
     });
   }
@@ -193,7 +194,6 @@ const setdata = () => {
 
 setdata();
 setStaticdatat();
-//complateTodo("531014ae-a13b-4b01-bcc9-6eff430d09ae");
 
 // events
 // open and close mode list
@@ -222,3 +222,7 @@ btn.addEventListener("click", (e) => {
 
   setdata();
 });
+
+// const list = [1, 2, 3, 4, 5];
+// list[40] = 6;
+// console.log(list.length); //  ?
