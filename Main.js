@@ -152,7 +152,7 @@ const setdata = () => {
 <div class="image_empty">
   <img src="/Images/Clipboard.png" alt="empty" />
 </div>
-<h2>empty list</h2>
+<h2>empty Tasks</h2>
 <p>There are no tasks available now</p>
 </div>`;
   }
