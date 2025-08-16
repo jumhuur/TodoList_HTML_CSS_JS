@@ -222,7 +222,3 @@ btn.addEventListener("click", (e) => {
 
   setdata();
 });
-
-// const list = [1, 2, 3, 4, 5];
-// list[40] = 6;
-// console.log(list.length); //  ?
